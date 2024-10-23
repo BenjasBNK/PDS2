@@ -1,4 +1,4 @@
-package br.com.loja.Assistec.model;
+package br.com.loja.assistec.model;
 
 public class Usuario {
 	private long iduser;

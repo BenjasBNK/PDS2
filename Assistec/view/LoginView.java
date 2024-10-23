@@ -1,15 +1,20 @@
-package br.com.loja.Assistec.view;
+package br.com.loja.assistec.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import br.com.loja.Assistec.controller.LoginController;
+import br.com.loja.assistec.controller.LoginController;
 
 public class LoginView extends JFrame {
 
@@ -50,6 +55,16 @@ public class LoginView extends JFrame {
 		txtSenha = new JPasswordField();
 		txtSenha.setBounds(176, 98, 128, 22);
 		btnLogin = new JButton();
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					onClickBtnLogin();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 
 		btnLogin.setBounds(179, 155, 76, 23);
 
@@ -69,6 +84,48 @@ public class LoginView extends JFrame {
 		getContentPane().add(txtSenha);
 		getContentPane().add(txtLogin);
 
+	}
+
+	//Método para clicar no botao e acionar o método autenticar()
+	protected void onClickBtnLogin() throws SQLException{
+		ArrayList<String> autenticado = new ArrayList<>();
+		
+		//Pré-validação
+		if(txtLogin.getText() != null &&
+				!txtLogin.getText().isEmpty() &&
+				String.valueOf(txtSenha.getPassword()) != null &&
+				!String.valueOf(txtSenha.getPassword()).isEmpty()) {
+			LoginController lc = new LoginController();
+			//Chamar o método autenticar e passar os parametros
+			try {
+				autenticado = lc.autenticar(txtLogin.getText(), 
+						new String(txtSenha.getPassword()));
+				if(autenticado.get(0) != null) {
+					JOptionPane.showMessageDialog(this, 
+							"Bem vindo " + autenticado.get(0)+
+							" acesso liberado!", "Atenção",
+							JOptionPane.INFORMATION_MESSAGE
+							);
+					this.dispose();
+					PrincipalView telaPrincipal = 
+							new PrincipalView(autenticado.get(0),
+									autenticado.get(1));
+					telaPrincipal.setLocationRelativeTo(telaPrincipal);
+					telaPrincipal.setVisible(true);
+					
+				}
+			} catch (NullPointerException e) {
+				JOptionPane.showMessageDialog(btnLogin, 
+						"Usuário ou senha inválidos!",
+						"Atenção", JOptionPane.WARNING_MESSAGE);
+			} 
+			
+		}else {
+			JOptionPane.showMessageDialog(btnLogin, 
+					"Verifique as informações",
+					"Aviso", JOptionPane.WARNING_MESSAGE);
+		}
+		
 	}
 
 

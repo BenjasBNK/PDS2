@@ -1,10 +1,10 @@
-package br.com.loja.Assistec.model;
+package br.com.loja.assistec.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import br.com.loja.Assistec.dal.ConexaoBD;
+import br.com.loja.assistec.dal.ConexaoBD;
 
 //Classe abstrata não pode ser instanciada, é um modelo para as classes que irão herdar seu comportamento
 //Esta classe facilita para que não precisemos em todas as Classes DAO executar todo este código, 

@@ -1,6 +1,6 @@
-package br.com.loja.assistec.controller;
+package br.com.loja.Assistec.controller;
 
-import br.com.loja.assistec.model.LoginDAO;
+import br.com.loja.Assistec.model.LoginDAO;
 
 public class LoginController {
 

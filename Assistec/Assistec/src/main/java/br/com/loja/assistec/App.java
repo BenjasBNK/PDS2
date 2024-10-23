@@ -1,6 +1,6 @@
-package br.com.loja.Assistec;
+package br.com.loja.assistec;
 
-import br.com.loja.Assistec.view.LoginView;
+import br.com.loja.assistec.view.LoginView;
 
 
 public class App {

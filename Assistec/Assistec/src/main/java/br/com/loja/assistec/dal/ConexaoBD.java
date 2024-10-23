@@ -1,8 +1,6 @@
-package br.com.loja.Assistec.dal;
+package br.com.loja.assistec.dal;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ConexaoBD {
 	// São criadas constantes pois as informações são estáticas
